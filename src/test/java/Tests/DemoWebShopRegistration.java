@@ -9,8 +9,6 @@ import java.util.List;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.testng.ITestResult;
-import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -25,7 +23,6 @@ public class DemoWebShopRegistration extends BaseSteps {
 	XSSFSheet sheet;
 	List<HashMap<String, String>> registrationDetailsAll;
 	HashMap<String, String> registrationDetails;
-
 
 	public DemoWebShopRegistration() throws IOException {
 		dataManager = new DataManager();

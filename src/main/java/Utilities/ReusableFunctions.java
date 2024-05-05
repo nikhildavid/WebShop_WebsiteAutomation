@@ -15,7 +15,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -53,12 +52,10 @@ public class ReusableFunctions {
 	public ReusableFunctions() {
 
 	}
-	
+
 	/*****************************************************************************************
-	 * Description : To click given web element
-	 * Arguments : WebElement, Element Info 
-	 * Return Value : NA
-	 * Author : Nikhil David
+	 * Description : To click given web element Arguments : WebElement, Element Info
+	 * Return Value : NA Author : Nikhil David
 	 *****************************************************************************************/
 
 	public void clickElement(WebElement e, String ElementInfo) {
@@ -66,62 +63,55 @@ public class ReusableFunctions {
 		waitunitlElementVisible(e, ElementInfo).click();
 		test.info("Clicked the element: " + ElementInfo);
 	}
-	
-	
+
 	/*****************************************************************************************
-	 * Description : To click on a web element in a list of elements with similar locators.
-	 * Arguments : WebElement, Element Info 
-	 * Return Value : NA
-	 * Author : Nikhil David
+	 * Description : To click on a web element in a list of elements with similar
+	 * locators. Arguments : WebElement, Element Info Return Value : NA Author :
+	 * Nikhil David
 	 *****************************************************************************************/
 
 	public void clickElementList(String Xpath, String ElementInfo) {
-WebElement e = driver.findElement(By.xpath(String.format(Xpath, ElementInfo)));
+		WebElement e = driver.findElement(By.xpath(String.format(Xpath, ElementInfo)));
 		waitunitlElementVisible(e, ElementInfo).click();
-		
-		String screenshotfolderpath = System.getProperty("user.dir")+File.separator+"src"+File.separator+"test"+File.separator+"resources"+File.separator+"Screenshot";
+
+		String screenshotfolderpath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
+				+ File.separator + "resources" + File.separator + "Screenshot";
 		String screenshotfilepath = screenshotfolderpath + "FullScreenshot.png";
-	Shutterbug.shootPage(driver,Capture.FULL).withName("FullScreenshot").save(screenshotfolderpath);
-		test.info("Clicked the element: " + ElementInfo, MediaEntityBuilder.createScreenCaptureFromPath(screenshotfilepath, ElementInfo).build());
+		Shutterbug.shootPage(driver, Capture.FULL).withName("FullScreenshot").save(screenshotfolderpath);
+		test.info("Clicked the element: " + ElementInfo,
+				MediaEntityBuilder.createScreenCaptureFromPath(screenshotfilepath, ElementInfo).build());
 
 	}
 
 	/*****************************************************************************************
-	 * Description : To write text in to a  web element
-	 * Arguments : WebElement, Element Info, Input text 
-	 * Return Value : NA
-	 * Author : Nikhil David
+	 * Description : To write text in to a web element Arguments : WebElement,
+	 * Element Info, Input text Return Value : NA Author : Nikhil David
 	 *****************************************************************************************/
-	
+
 	public void writeText(WebElement e, String ElementInfo, String text) {
 		waitunitlElementVisible(e, ElementInfo).sendKeys(text);
 
 		test.info("Entered value in: " + ElementInfo);
 	}
 
-	
 	/*****************************************************************************************
-	 * Description : To get text from a web element
-	 * Arguments : WebElement, Element Info 
-	 * Return Value : String
-	 * Author : Nikhil David
+	 * Description : To get text from a web element Arguments : WebElement, Element
+	 * Info Return Value : String Author : Nikhil David
 	 *****************************************************************************************/
-	
+
 	public String readText(WebElement e, String ElementInfo) {
 		waitunitlElementVisible(e, ElementInfo);
 		test.info("Retrieved text from: " + ElementInfo);
 		return e.getText();
 
 	}
-	
-	
+
 	/*****************************************************************************************
-	 * Description : To get text from a web element in a list of elements with similar locators.
-	 * Arguments : WebElement, Element Info 
-	 * Return Value : String
+	 * Description : To get text from a web element in a list of elements with
+	 * similar locators. Arguments : WebElement, Element Info Return Value : String
 	 * Author : Nikhil David
 	 *****************************************************************************************/
-	
+
 	public String readTextElementList(String Xpath, String ElementInfo) {
 		WebElement e = driver.findElement(By.xpath(String.format(Xpath, ElementInfo)));
 		waitunitlElementVisible(e, ElementInfo);
@@ -129,72 +119,56 @@ WebElement e = driver.findElement(By.xpath(String.format(Xpath, ElementInfo)));
 		return e.getText();
 
 	}
-	
-	
-	
-
 
 	/*****************************************************************************************
-	 * Description : To wait until given web element is visible
-	 * Arguments : WebElement, Element Info 
-	 * Return Value : WebElement
-	 * Author : Nikhil David
+	 * Description : To wait until given web element is visible Arguments :
+	 * WebElement, Element Info Return Value : WebElement Author : Nikhil David
 	 *****************************************************************************************/
-	
+
 	public WebElement waitunitlElementVisible(WebElement e, String ElementInfo) {
 		test.info("Waiting for element: " + ElementInfo);
 		wait.until(ExpectedConditions.visibilityOf(e));
-		test.info(ElementInfo, MediaEntityBuilder
-				.createScreenCaptureFromBase64String(takeScreenShot(driver), "Screenshot").build());
+		test.info(ElementInfo,
+				MediaEntityBuilder.createScreenCaptureFromBase64String(takeScreenShot(driver), "Screenshot").build());
 		return e;
 
 	}
 
-	
 	/*****************************************************************************************
-	 * Description : To generate timestamp in 'MM-dd-yyyy' format
-	 * Arguments : WebElement, Element Info 
-	 * Return Value : NA
-	 * Author : Nikhil David
+	 * Description : To generate timestamp in 'MM-dd-yyyy' format Arguments :
+	 * WebElement, Element Info Return Value : NA Author : Nikhil David
 	 *****************************************************************************************/
-	
+
 	public String generateTimestamp() {
 
 		return (new SimpleDateFormat("MM-dd-yyyy-hhmmss").format(new java.util.Date()));
 	}
 
-	
 	/*****************************************************************************************
-	 * Description : To take a screenshot
-	 * Arguments : WebDriver instance 
-	 * Return Value : String
-	 * Author : Nikhil David
+	 * Description : To take a screenshot Arguments : WebDriver instance Return
+	 * Value : String Author : Nikhil David
 	 *****************************************************************************************/
-	
+
 	public String takeScreenShot(WebDriver driver) {
 
 		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
 	}
 
 	/*****************************************************************************************
-	 * Description : To validate given two strings are same
-	 * Arguments : String1, String2 
-	 * Return Value : NA
-	 * Author : Nikhil David
+	 * Description : To validate given two strings are same Arguments : String1,
+	 * String2 Return Value : NA Author : Nikhil David
 	 *****************************************************************************************/
-	
+
 	public void AssertStringsEqual_True(String s1, String s2) {
 		Assert.assertTrue(s1.equals(s2));
 		test.info("Verification is successfull");
 	}
 
 	/*****************************************************************************************
-	 * Description : To verify given web element is displayed
-	 * Arguments : WebElement, Element Info 
-	 * Return Value : NA
-	 * Author : Nikhil David
+	 * Description : To verify given web element is displayed Arguments :
+	 * WebElement, Element Info Return Value : NA Author : Nikhil David
 	 *****************************************************************************************/
-	
+
 	public void verifyElement_isDisplayed(WebElement e, String ElementInfo) {
 		waitunitlElementVisible(e, ElementInfo);
 		Assert.assertTrue(e.isDisplayed());
@@ -202,11 +176,9 @@ WebElement e = driver.findElement(By.xpath(String.format(Xpath, ElementInfo)));
 
 	/*****************************************************************************************
 	 * Description : To convert given date in format 'yyyy-MM-dd' to 'dd-MM-yyyy'
-	 * Arguments : String 
-	 * Return Value : String
-	 * Author : Nikhil David
+	 * Arguments : String Return Value : String Author : Nikhil David
 	 *****************************************************************************************/
-	
+
 	public String foramtDate_yyyyMMdd_to_ddMMyyyy(String dateAsString) {
 		DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
 		DateFormat targetFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -220,27 +192,21 @@ WebElement e = driver.findElement(By.xpath(String.format(Xpath, ElementInfo)));
 	}
 
 	/*****************************************************************************************
-	 * Description : To select option from a dropdown element using value
-	 * Arguments : WebElement, Value to be selected
-	 * Return Value : NA
-	 * Author : Nikhil David
+	 * Description : To select option from a dropdown element using value Arguments
+	 * : WebElement, Value to be selected Return Value : NA Author : Nikhil David
 	 *****************************************************************************************/
-	
-	
-	
+
 	public void selectDropDownByValue(WebElement e, String value) {
 		waitunitlElementVisible(e, "");
 		Select typeDropMenu = new Select(e);
 		typeDropMenu.selectByValue(value);
 	}
-	
+
 	/*****************************************************************************************
-	 * Description : To convert excel data in to Object[][]
-	 * Arguments : XSSFSheet
-	 * Return Value : Object[][]
-	 * Author : Nikhil David
+	 * Description : To convert excel data in to Object[][] Arguments : XSSFSheet
+	 * Return Value : Object[][] Author : Nikhil David
 	 *****************************************************************************************/
-	
+
 	public Object[][] getTestData(XSSFSheet sheet) {
 		List<HashMap<String, String>> DetailsAll;
 		HashMap<String, String> Details;
@@ -252,9 +218,9 @@ WebElement e = driver.findElement(By.xpath(String.format(Xpath, ElementInfo)));
 			for (int c = 0; c < col; c++) {
 				try {
 					String DetailsHeader = retriveExcelCellValue(sheet, 0, c);
-					
+
 					String Detail = retriveExcelCellValue(sheet, i, c);
-					
+
 					Details.put(DetailsHeader, Detail);
 
 				} catch (IOException e) {
@@ -273,16 +239,11 @@ WebElement e = driver.findElement(By.xpath(String.format(Xpath, ElementInfo)));
 	}
 
 	/*****************************************************************************************
-	 * Description : To fetch cell value from Excel sheet
-	 * Arguments : WebElement, Value to be selected
-	 * Return Value : NA
-	 * Author : Nikhil David
+	 * Description : To fetch cell value from Excel sheet Arguments : WebElement,
+	 * Value to be selected Return Value : NA Author : Nikhil David
 	 *****************************************************************************************/
-	
-	
 
-	
-	public String retriveExcelCellValue(XSSFSheet sheet, int r,int c) throws IOException {
+	public String retriveExcelCellValue(XSSFSheet sheet, int r, int c) throws IOException {
 
 		String s = sheet.getRow(r).getCell(c).toString();
 		return s;

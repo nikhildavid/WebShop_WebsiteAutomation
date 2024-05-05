@@ -7,26 +7,18 @@ import java.util.ArrayList;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.testng.ITestContext;
-
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import Base.BaseSteps;
 import Managers.DataManager;
-import Managers.ExtentTestManager;
 
 public class DemoWebShopCategories extends BaseSteps {
-
 
 	DataManager dataManager;
 	FileInputStream fs;
 	XSSFWorkbook workbook;
 	XSSFSheet sheet;
 	ArrayList<String> categoryList;
-
 
 	public DemoWebShopCategories() throws IOException {
 		dataManager = new DataManager();

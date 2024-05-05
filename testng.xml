@@ -10,30 +10,26 @@
 		<classes>
 			<class name="Tests.DemoWebShopRegistration" />
 		</classes>
-	</test> <!--
-	Test -->
-
+	</test>
+	
+	<test thread-count="1" name="User login">
+		<classes>
+			<class name="Tests.DemoWebShopUserLogin" />
+		</classes>
+	</test> 
 
 	<test thread-count="1" name="Add products to Cart">
 		<classes>
 			<class name="Tests.DemoWebShopAddProductToCart" />
 		</classes>
-	</test> <!--
-	Test -->
+	</test>
 
 	<test thread-count="1" name="Navigate through Category pages">
 		<classes>
 			<class name="Tests.DemoWebShopCategories" />
 		</classes>
-	</test> <!--
-	Test -->
+	</test> 
 
-	<test thread-count="1" name="User login">
-		<classes>
-			<class name="Tests.DemoWebShopUserLogin" />
-		</classes>
-	</test> <!--
-	Test -->
 
 </suite> <!--
 Suite -->

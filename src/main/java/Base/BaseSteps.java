@@ -1,6 +1,5 @@
 package Base;
 
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -17,35 +16,33 @@ import Runtime.RunTimeEnvironment;
 import pages.PageObjectManager;
 
 public class BaseSteps {
-	
+
 	public RunTimeEnvironment runtime;
 	public PageObjectManager pages;
 	public String TestCaseName;
 	public BaseSteps basesteps;
 	public Listeners L;
-	
+
 	Properties prop = new Properties();
 	String browserName;
-	
 
-
-	public void initialiseRunTime(String TestName){
+	public void initialiseRunTime(String TestName) {
 		try {
-			FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\config.properties");
+			FileInputStream fis = new FileInputStream(
+					System.getProperty("user.dir") + "\\src\\test\\resources\\config.properties");
 			prop.load(fis);
-			browserName = System.getProperty("browser")!=null ? System.getProperty("browser") : prop.getProperty("browser");
+			browserName = System.getProperty("browser") != null ? System.getProperty("browser")
+					: prop.getProperty("browser");
 		} catch (IOException e) {
-		
+
 			e.printStackTrace();
 		}
-		runtime= new RunTimeEnvironment(browserName, TestName);
-		
-		pages=new PageObjectManager(runtime);
-//		L = new Listeners(runtime);
-		
-			
+		runtime = new RunTimeEnvironment(browserName, TestName);
+
+		pages = new PageObjectManager(runtime);
+
 	}
-	
+
 	@BeforeMethod
 	public void startTest(final ITestContext testContext) {
 		basesteps = new BaseSteps();
@@ -53,10 +50,10 @@ public class BaseSteps {
 		basesteps.initialiseRunTime(TestCaseName);
 
 	}
-	
+
 	@AfterMethod
 	public void teardown(ITestResult result) {
-	ExtentTestManager.iffailed(result);
+		ExtentTestManager.iffailed(result);
 		basesteps.runtime.driver.close();
 
 	}
@@ -64,7 +61,7 @@ public class BaseSteps {
 	@AfterSuite
 	public void r() {
 		basesteps.runtime.driver.quit();
-		
+
 		ExtentTestManager.endTest();
 	}
 
