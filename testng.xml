@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+
+	<!--<listeners>
+<listener class-name="Listeners.Listeners"/>
+	</listeners> -->
+
+	<test thread-count="1" name="User registration">
+		<classes>
+			<class name="Tests.DemoWebShopRegistration" />
+		</classes>
+	</test> <!--
+	Test -->
+
+
+	<test thread-count="1" name="Add products to Cart">
+		<classes>
+			<class name="Tests.DemoWebShopAddProductToCart" />
+		</classes>
+	</test> <!--
+	Test -->
+
+	<test thread-count="1" name="Navigate through Category pages">
+		<classes>
+			<class name="Tests.DemoWebShopCategories" />
+		</classes>
+	</test> <!--
+	Test -->
+
+	<test thread-count="1" name="User login">
+		<classes>
+			<class name="Tests.DemoWebShopUserLogin" />
+		</classes>
+	</test> <!--
+	Test -->
+
+</suite> <!--
+Suite -->
